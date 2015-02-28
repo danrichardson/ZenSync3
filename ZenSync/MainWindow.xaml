@@ -1,0 +1,69 @@
+﻿<Window x:Class="ZenSync.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:zenSync="clr-namespace:ZenSync"
+        Title="MainWindow" Height="350" Width="525"
+>
+    <Window.Resources>
+        <zenSync:PasswordToStarConverter x:Key="PasswordToStarConverter"/>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+        
+            <Button Grid.Column="0" Grid.Row="0" Content="Root Dir.." Click="RootDirButton_OnClick"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Text="{Binding RootDirectory, Mode=TwoWay}"/>
+
+            <Button Grid.Column="0" Grid.Row="1" Content="Credentials.." Click="CredentialsButton_OnClick"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding UserName, Mode=TwoWay}"/>
+            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Password, Mode=TwoWay, Converter={StaticResource PasswordToStarConverter}}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">
+                <CheckBox IsChecked="{Binding SaveCredentials, Mode=TwoWay}"/>
+                <TextBlock Text="Save Credentials?"/>
+            </StackPanel>
+        
+            <Button Grid.Column="0" Grid.Row="3" Content="ZenSync!" Click="ZenSync_OnClick"/>
+            <ListBox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6"
+                ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                ScrollViewer.VerticalScrollBarVisibility="Visible">
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>    
+        
+            <ListBox Grid.Column="0"
+                    ItemsSource="{Binding DirectoryRows, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+            </ListBox>
+            <ListBox Grid.Column="1"
+                    ItemsSource="{Binding CatalogRows, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+            </ListBox>
+        </Grid>
+
+    </Grid>
+</Window>
