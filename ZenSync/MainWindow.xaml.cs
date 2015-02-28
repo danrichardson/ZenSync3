@@ -41,7 +41,6 @@ namespace ZenSync
             SaveCredentials = Properties.Settings.Default.SaveSettings;
         }
         #endregion
-
         
         #region properties
         private ZenfolioClient _client;
@@ -402,7 +401,10 @@ namespace ZenSync
             //CreateUploadDialog(newDialog);
             //return;
             //await Task.Run(() => ZenSyncStart());
-            ZenSyncStart();
+            Task.Factory.StartNew(() =>
+                                  {
+                                      ZenSyncStart();
+                                  });
         }
 
         private void ZenSyncStart()
