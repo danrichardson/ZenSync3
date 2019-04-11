@@ -44,7 +44,7 @@ namespace ZenSync
         
         #region properties
         private ZenfolioClient _client;
-        public string CatalogFile = "C:\\ZenfolioCatalog.xml";
+        public string CatalogFile = "ZenfolioCatalog.xml";
         public string DefaultPhotoSetName = "Photos";
 
         private ObservableCollection<ProgressDialog> progressDialogs = new ObservableCollection<ProgressDialog>();
